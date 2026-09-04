@@ -1,6 +1,6 @@
 ## Matt Speck
 
-AI engineer at [@ClearFracture](https://github.com/ClearFracture), working mostly in Python. I build LLM-backed compilation and evaluation pipelines — agent drivers, tracing, and the test harnesses that keep them honest.
+AI engineer at [@ClearFracture](https://github.com/ClearFracture), working mostly in Python.
 
 Seattle, WA · [mattspeck.com](https://www.mattspeck.com)
 

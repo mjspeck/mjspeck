@@ -4,7 +4,9 @@ AI engineer at [@ClearFracture](https://github.com/ClearFracture), working mostl
 
 Seattle, WA · [mattspeck.com](https://www.mattspeck.com)
 
+<!--
 [![Certified Thinker](https://meatproxy.me/badge/c/ybnzy.svg)](https://meatproxy.me/c/ybnzy)
+-->
 [![Superset](assets/superset-badge.svg)](https://superset.sh/matt-speck)
 
 <picture>

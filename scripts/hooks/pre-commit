@@ -1,0 +1,15 @@
+#!/bin/sh
+# Install: ln -s ../../scripts/hooks/pre-commit .git/hooks/pre-commit
+set -eu
+
+ICON=assets/superset-icon.png
+BADGE=assets/superset-badge.svg
+
+if git diff --cached --name-only --diff-filter=ACM | grep -qx "$ICON"; then
+  TMP=$(mktemp)
+  trap 'rm -f "$TMP"' EXIT
+  git show ":$ICON" > "$TMP"
+  echo "pre-commit: $ICON changed, regenerating $BADGE"
+  sh "$(git rev-parse --show-toplevel)/scripts/generate-superset-badge.sh" "$TMP" "$BADGE"
+  git add "$BADGE"
+fi

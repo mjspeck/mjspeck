@@ -1,0 +1,31 @@
+name: Disable Actions on forks
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  disable:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Disable Actions on every fork
+        env:
+          GH_TOKEN: ${{ secrets.FORK_ADMIN_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::FORK_ADMIN_TOKEN secret is not set"
+            exit 1
+          fi
+          gh repo list "$OWNER" --fork --limit 1000 --json nameWithOwner --jq '.[].nameWithOwner' |
+          while read -r repo; do
+            if [ "$(gh api "repos/$repo/actions/permissions" --jq .enabled)" = "true" ]; then
+              gh api -X PUT "repos/$repo/actions/permissions" -F enabled=false
+              echo "Disabled Actions on $repo"
+            fi
+          done

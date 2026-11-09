@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Disable Actions on every fork
         env:
-          GH_TOKEN: ${{ secrets.FORK_ADMIN_TOKEN }}
+          GH_TOKEN: ${{ secrets.FORK_ADMIN_SECRET }}
           OWNER: ${{ github.repository_owner }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
-            echo "::error::FORK_ADMIN_TOKEN secret is not set"
+            echo "::error::FORK_ADMIN_SECRET secret is not set"
             exit 1
           fi
           gh repo list "$OWNER" --fork --limit 1000 --json nameWithOwner --jq '.[].nameWithOwner' |
